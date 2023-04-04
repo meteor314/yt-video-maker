@@ -1,0 +1,15 @@
+# vim stuff
+*.swo
+*.swp
+
+# vscode stuff
+.vscode/
+
+# python stuff
+__pycache__/
+
+# custom stuff 
+*.log
+*.env
+reddit.json
+reddit.json.bak

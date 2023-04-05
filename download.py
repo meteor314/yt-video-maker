@@ -19,22 +19,14 @@ with open('reddit.json', 'r') as f:
 # Download all videos from reddit.json video links in videos folder with current date
 for item in data:
     video_url = item['video']
+    audio_url = item['audio']
     response = requests.get(video_url, stream=True)
-    file_name = re.sub(r'[<>:\"/\\\|\?\*\[\]]+', '_', item['title']) + '.mp4'
+    file_name = re.sub(r'[<>:\"\'/\\\|\?\*\[\] ]+', '_',
+                       item['title']) + '.mp4'
     try:
-        # download video in video/date folder
-        with open(f"{folder_path}/{date}/{file_name}", 'wb') as f:
-            for chunk in response.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    f.write(chunk)
-        # check if video has audio
-        audio_codec = subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "a:0", "-show_entries", "stream=codec_name",
-                                              "-of", "default=noprint_wrappers=1:nokey=1", f"{folder_path}/{date}/{file_name}"]).decode("utf-8").strip()
-        if not audio_codec:
-            # remove video file if it has no audio
-            os.remove(f"{folder_path}/{date}/{file_name}")
-            print(f"Skipped {file_name} (no audio)")
-            continue
+        # download video in video/date folder with youtube-dl
+        subprocess.call(
+            f"youtube-dl -f bestvideo+bestaudio --merge-output-format mp4 {video_url} -o {folder_path}/{date}/{file_name}", shell=True)
         # write file name in video.txt
         with open(f"{folder_path}/{date}/video.txt", 'a') as f:
             f.write(f"file {file_name}\n")

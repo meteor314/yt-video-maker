@@ -13,3 +13,6 @@ __pycache__/
 *.env
 reddit.json
 reddit.json.bak
+*.txt
+
+videos/

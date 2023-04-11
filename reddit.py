@@ -1,12 +1,17 @@
 import requests
 import json
 from datetime import datetime
-
+import configparser
+# Configuration
+config = configparser.ConfigParser()
+config.read('config.ini')
+subreddit = config['REDDIT']['subreddit']
+total_videos = int(config['REDDIT']['total_videos'])
 # list PublicFreakout videos of reddit that contain o video and a title of last 24 hours sorted by most upvoted
 
 
 def reddit():
-    URL = 'https://www.reddit.com/r/PublicFreakout/top.json?t=day&limit=30'
+    URL = f'https://www.reddit.com/r/{subreddit}/top.json?t=day&limit={total_videos}'
     try:
         response = requests.get(URL, headers={
                                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
@@ -43,7 +48,3 @@ def reddit():
         return result
     except Exception as e:
         return {'message': str(e)}
-
-
-reddit()
-print('Done')

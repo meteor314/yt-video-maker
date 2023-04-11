@@ -1,12 +1,12 @@
-# Reddit Video Collector 🔍🎥
-
-<div align="center">
+<div align ="center">
+<h1>Reddit Video Collector 🔍🎥</h1>
     <img src="https://i.imgur.com/pAiDEYr.png" height="96px" weight='48px'>
 
 [![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)](https://www.python.org/)
 [![FFmpeg](https://img.shields.io/badge/FFmpeg-v4.4-blue)](https://ffmpeg.org/)
 [![Reddit](https://img.shields.io/badge/Reddit-API-orange)](https://www.reddit.com/dev/api/)
 [![YouTube](https://img.shields.io/badge/YouTube-API-red)](https://developers.google.com/youtube/v3)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
 
 </div>
 
@@ -44,6 +44,15 @@ python reddit.py
 - The script will retrieve information about the top PublicFreakout videos from Reddit and store it in a JSON file called `reddit.json`
 - The script will print the time the data was collected and the total number of videos collected
 - If any error occurs during the process, the script will return an error message.
+
+# Configuration
+
+If you want get video from another subrredit, just change the name of the subrredit in config.ini file.
+
+```bash
+[REDDIT]
+subreddit = PublicFreakout
+```
 
 ## To-Do
 
